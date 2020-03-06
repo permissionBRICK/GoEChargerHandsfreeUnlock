@@ -26,9 +26,5 @@ Limitations:
 - You need to plug in the Wemos D1 Mini near the Go-E charger, and also in wifi range of the car
 - If someone unplugs the go-e charger they can reset it to unlocked if that is your default state, or they can just plug in their own charger. Prevent people from unplugging it.
 
-Setup: Get a Wemos D1 Mini
-Input your go-e wifi credentials from the included card into: goessid and goepassword
-Input your desired unlock-hotspot credentials into assid and apassword
-Input the time you want the charger to remain unlocked in seconds into plugInWaitTime. (you do not need to make this hours long, as soon as you plug in your car the timer stops)
 
 Note: The code is kind of jank, but it works. I never intended this to adhere to any standards, Just to take as little time as possible.
