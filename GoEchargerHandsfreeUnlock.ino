@@ -1,3 +1,8 @@
+// ----------------------------------------------------------------------------------
+// --------- Go-e Charger Handsfree Unlock / Jank City by permissionBRICK -----------
+// ----------------------------------------------------------------------------------
+
+// It slices, it dices, it unlocks your car charger.
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
