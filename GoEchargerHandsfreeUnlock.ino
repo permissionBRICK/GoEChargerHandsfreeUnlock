@@ -5,7 +5,7 @@
 #include <ArduinoJson.h>
 
 
-const int plugInWaitTime= 300; // time in seconds the charger stays unlocked waiting to be plugged into the car
+const int plugInWaitTime= 300; // time in seconds the charger stays unlocked waiting to be plugged into the car, or after unplugging the car
 
 // Set these to your desired credentials for the unlock hotspot.
 const char *assid = "Go-E-Charger-Access";
