@@ -35,97 +35,95 @@ delay(3000);
 }
 
 void loop() {
-  if(state==0)
-  {
-    Serial.println("Configuring access point...");
-    /* You can remove the password parameter if you want the AP to be open. */
-    WiFi.softAP(assid, apassword);
-    delay(1000);
-    IPAddress myIP = WiFi.softAPIP();
-    Serial.print("AP IP address: ");
-    Serial.println(myIP);
-    state++;
-  }
-  else if(state== 1)
-  {
-    if(WiFi.softAPgetStationNum()>0)
-  {
-    Serial.print("connected client");
-    delay(2000);
-    WiFi.softAPdisconnect(true);
-    state++;
-  }
-  delay(100);
-  }
-  else if(state == 2)
-  {
-    delay(1000);
-    WiFiMulti.addAP("go-e-005410", "5ef40b0238");
-    state++;
-  }
-  else if(state == 3)
-  {
-    // wait for WiFi connection
-  
-    if((WiFiMulti.run() == WL_CONNECTED)) {
+    if(state==0)
+    {
+        Serial.println("Configuring access point...");
+        /* You can remove the password parameter if you want the AP to be open. */
+        WiFi.softAP(assid, apassword);
+        delay(1000);
+        IPAddress myIP = WiFi.softAPIP();
+        Serial.print("AP IP address: ");
+        Serial.println(myIP);
+        state++;
+    }
+    else if(state== 1)
+    {
+      if(WiFi.softAPgetStationNum()>0)
+      {
+        Serial.print("connected client");
+        delay(2000);
+        WiFi.softAPdisconnect(true);
+        state++;
+      }
+      delay(100);
+    }
+    else if(state == 2)
+    {
+      delay(1000);
+      WiFiMulti.addAP(goessid, goepassword);
+      state++;
+    }
+    else if(state == 3)
+    {
+      // wait for WiFi connection
 
+      if((WiFiMulti.run() == WL_CONNECTED)) 
+      {
+          HTTPClient http;
+          IPAddress ip = WiFi.gatewayIP();
+          char ipstr[50];
+          sprintf(ipstr, "%d.%d.%d.%d",ip[0], ip[1], ip[2], ip[3]);
+
+
+          char url[100];
+
+          sprintf(url, "http://%s/mqtt?payload=alw=1", ipstr);
+          getHttp(url);
+
+
+
+
+          timeremaining = plugInWaitTime;
+          state++;
+      }
+      delay(1000);
+    }
+    else if(state==4)
+    {
+      int result = getCarState();
+      if(result!= -1)
+      {
+        if(result!=1) // if the car is not plugged into the charger
+        {
+          if(timeremaining>0) // wait for a total of 
+          {
+            timeremaining=timeremaining-10;
+          }
+          else
+          {
+            state++;
+          }
+        }
+      }
+      delay(10000);
+    }
+    else if(state==5) //disable charging, disconnect charger wifi and restart ap.
+    {
+      if((WiFiMulti.run() == WL_CONNECTED)) {
         HTTPClient http;
         IPAddress ip = WiFi.gatewayIP();
         char ipstr[50];
         sprintf(ipstr, "%d.%d.%d.%d",ip[0], ip[1], ip[2], ip[3]);
-        
-        
         char url[100];
-
-        sprintf(url, "http://%s/mqtt?payload=alw=1", ipstr);
+        sprintf(url, "http://%s/mqtt?payload=alw=0", ipstr); //disable charger
         getHttp(url);
-        
-
-        
-        
-        timeremaining = plugInWaitTime;
-        state++;
-    }
-    delay(1000);
-  }
-  else if(state==4)
-  {
-    int result = getCarState();
-    if(result!= -1)
-    {
-      if(result!=1) // if the car is connected (and either  charging or not charging)
-      {
-        if(timeremaining>0) // wait for a total of 
-        {
-          timeremaining=timeremaining-10;
-        }
-        else
-        {
-          state++;
-        }
+        delay(1000);
+        WiFiMulti.cleanAPlist();
+        WiFi.disconnect();
+        state = 0;
       }
-    }
-    delay(10000);
-  }
-  else if(state==5) //disable charging, disconnect charger wifi and restart ap.
-  {
-    if((WiFiMulti.run() == WL_CONNECTED)) {
-      HTTPClient http;
-      IPAddress ip = WiFi.gatewayIP();
-      char ipstr[50];
-      sprintf(ipstr, "%d.%d.%d.%d",ip[0], ip[1], ip[2], ip[3]);
-      char url[100];
-      sprintf(url, "http://%s/mqtt?payload=alw=0", ipstr); //disable charger
-      getHttp(url);
       delay(1000);
-      WiFiMulti.cleanAPlist();
-      WiFi.disconnect();
-      state = 0;
     }
-    delay(1000);
-  }
-    
-    
 }
 //returns 1 if the car is connected to the charger (whether charging or not does not matter)
 //returns 0 if the car isn't connected to the charger
