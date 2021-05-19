@@ -26,5 +26,10 @@ Limitations:
 - You need to plug in the Wemos D1 Mini near the Go-E charger, and also in wifi range of the car
 - If someone unplugs the go-e charger they can reset it to unlocked if that is your default state, or they can just plug in their own charger. Prevent people from unplugging it.
 
+I use a setup like this:
+![Steel Box Closed](https://i.imgur.com/g5GSDOk.jpeg)
+
+![Steel Box Open](https://i.imgur.com/uk6z2nd.jpeg)
+
 
 Note: The code is kind of jank, but it works. I never intended this to adhere to any standards, Just to take as little time as possible.
