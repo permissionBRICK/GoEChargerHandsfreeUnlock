@@ -29,7 +29,7 @@ Limitations:
 I use a setup like this:
 ![Steel Box Closed](https://i.imgur.com/g5GSDOk.jpeg)
 
-![Steel Box Open](https://i.imgur.com/uk6z2nd.jpeg)
+![Steel Box Open](https://i.imgur.com/bxqFMKn.jpeg)
 
 
 Note: The code is kind of jank, but it works. I never intended this to adhere to any standards, Just to take as little time as possible.
