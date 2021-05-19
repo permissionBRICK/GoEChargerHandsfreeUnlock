@@ -1,4 +1,4 @@
-# GoEChargerHandsfreeUnlock
+# Go-e Charger Handsfree Auto Unlock
 A Program for Wemos D1 Mini Arduino which allows you to automatically unlock your Go-E Charger when your car or phone is nearby.
 
 How does this work?
