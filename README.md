@@ -4,6 +4,12 @@ A Program for Wemos D1 Mini Arduino which allows you to automatically unlock you
 How does this work?
 TL;DR: The D1 Opens a wifi hotspot with a password that you save to your phone/car. Once your phone/car automatically connects when you get in range, the D1 unlocks the charger. Once you unplug your car it re-locks the charger.
 
+I use a setup like this:
+
+![Steel Box Open](https://i.imgur.com/bxqFMKn.jpeg)
+
+![Steel Box Closed](https://i.imgur.com/g5GSDOk.jpeg)
+
 
 Logic:
 - The D1 connects to the wifi config hotspot of the Go-E charger
@@ -19,12 +25,6 @@ Logic:
 
 
 The charger is initially locked so you can have it in a default state of unlocked, to be easily able to take it with you without needing to reconfigure it via the app. 
-
-I use a setup like this:
-
-![Steel Box Open](https://i.imgur.com/bxqFMKn.jpeg)
-
-![Steel Box Closed](https://i.imgur.com/g5GSDOk.jpeg)
 
 
 Limitations:
