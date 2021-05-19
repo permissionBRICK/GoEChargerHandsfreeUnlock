@@ -1,7 +1,7 @@
 # Go-e Charger Handsfree Auto Unlock
 A Program for Wemos D1 Mini Arduino which allows you to automatically unlock your Go-E Charger when your car or phone is nearby.
 
-How does this work?
+## How does this work?
 TL;DR: The D1 Opens a wifi hotspot with a password that you save to your phone/car. Once your phone/car automatically connects when you get in range, the D1 unlocks the charger. Once you unplug your car it re-locks the charger.
 
 I use a setup like this:
